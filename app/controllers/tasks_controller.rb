@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks
   def user_tasks
     @tasks = Task.where(user_id: params[:user_id])
-
+    
     render json: @tasks
   end
 
