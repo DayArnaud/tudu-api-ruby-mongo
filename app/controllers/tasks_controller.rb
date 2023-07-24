@@ -3,6 +3,12 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def user_tasks
+    return render json: { error: 'User id is missing' }, status: :bad_request unless params[:user_id]
+    
+    if params[:status]
+      @tasks = Task.where(user_id: params[:user_id], status: params[:status])
+      return render json: @tasks
+    end
     @tasks = Task.where(user_id: params[:user_id])
     
     render json: @tasks
