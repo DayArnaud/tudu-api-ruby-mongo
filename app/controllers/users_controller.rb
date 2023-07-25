@@ -8,7 +8,6 @@ class UsersController < ApplicationController
 
     def create
       @user = User.new(user_params)
-      @user.uid = @user.email
   
       if @user.save
         render json: @user, status: :created

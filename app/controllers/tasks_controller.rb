@@ -25,24 +25,10 @@ class TasksController < ApplicationController
     end
   end
 
-  def subtask_update 
-    @parent_task = Task.find(params[:task_id])
-    @subtask = @parent_task.subtask.find(params[:subtask_id])
-
-    @subtask.update(subtask_update_params)
-
-    if @subtask.save
-      render json: @subtask, status: :created
-    else
-      render json: @subtask.errors, status: :unprocessable_entity
-    end
-  end
-
   # GET /tasks/1
   def show
     @task = Task.find(params[:id])
-
-    render json: @task
+    render json: @task 
   end
 
   # POST /tasks
@@ -67,8 +53,17 @@ class TasksController < ApplicationController
 
   # DELETE /tasks/1
   def destroy
+    @task = Task.find(params[:id])
+    @comments = Comment.where(task_id:params[:id])
+    @comments.destroy
     @task.destroy
-  end
+  
+    if @task.destroyed?
+      render json: { message: 'Tarefa removida.' }, status: :ok
+    else
+      render json: { message: 'Falha ao remover a tarefa.' }, status: :unprocessable_entity
+    end
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.
