@@ -82,12 +82,12 @@ class TasksController < ApplicationController
     end
 
     def subtask_update_params
-      params.require(:subtask).permit(:check)
+      params.require(:subtask).permit(:isCompleted)
     end
 
 
     # Only allow a list of parameters updateds.
     def sub_task_params
-      params.require(:task).permit(:description)
+      params.require(:task).permit(:description, :isCompleted)
     end
 end
