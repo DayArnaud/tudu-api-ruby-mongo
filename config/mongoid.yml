@@ -4,16 +4,16 @@ development:
     # Defines the default client. (required)
     default:
       # Mongoid can connect to a URI accepted by the driver:
-      # uri: mongodb://user:password@mongodb.domain.com:27017/task_api_development
+      uri: mongodb+srv://petecagato:gatogato@cluster-tudu.1jiptxr.mongodb.net/task_api_development
 
       # Otherwise define the parameters separately.
       # This defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: task_api_development
+      # database: task_api_development xx
       # Provides the hosts the default client can connect to. Must be an array
       # of host:port pairs. (required)
-      hosts:
-        - localhost:27017
+      # hosts:
+      #   - localhost:27017 xx
       options:
         # Note that all options listed below are Ruby driver client options (the mongo gem).
         # Please refer to the driver documentation of the version of the mongo gem you are using
@@ -64,7 +64,7 @@ development:
         # local_threshold: 0.015
 
         # The timeout in seconds for selecting a server for an operation. (default: 30)
-        # server_selection_timeout: 30
+        server_selection_timeout: 1
 
         # The maximum number of connections in the connection pool. (default: 5)
         # max_pool_size: 5
@@ -184,9 +184,3 @@ test:
           mode: :primary
         max_pool_size: 1
 
-production:
-  clients:
-    default:
-      uri: <%= ENV['MONGODB_URI'] %>
-      options:
-        server_selection_timeout: 1
