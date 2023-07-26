@@ -15,10 +15,11 @@ worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "development"
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-port        ENV['PORT']     || 3000
-environment ENV['RACK_ENV'] || 'development'
+port        ENV.fetch('PORT')     || 3000
+environment ENV.fetch('RACK_ENV') || 'development'
 
-# port ENV.fetch("PORT") { 3000 }
+# Bind the server to "0.0.0.0" so it can be accessed from outside the machine
+bind "tcp://0.0.0.0:#{ENV['PORT']}"
 
 # Specifies the `environment` that Puma will run in.
 #
